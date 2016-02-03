@@ -65,8 +65,8 @@ var tequilla = new FoodItem(
 var guacamole = new FoodItem(
     'holy guacamole', 
     50, 
-    false, 
-    false, 
+    true, 
+    true, 
     false
 );
 
@@ -81,9 +81,9 @@ var tortillaChips = new FoodItem(
 var beansAndRice = new FoodItem(
     'black beans and rice', 
     300, 
-    false, 
     true, 
-    false
+    true, 
+    true
 );
 
 var tea = new FoodItem(
@@ -257,8 +257,7 @@ Plate.prototype.isVegan = function() {
 	return isVegan;
 }
 
- var testPlate = burritoPlate.isVegan();
-console.log(testPlate);
+ 
 
 Plate.prototype.isGlutenFree = function() {
 	var isGlutenFree = true
@@ -269,8 +268,6 @@ Plate.prototype.isGlutenFree = function() {
 	return isGlutenFree;
 }
 
-var testBurrito = burritoPlate.isGlutenFree();
-console.log(testBurrito);
 
 Plate.prototype.isCitrusFree = function() {
 	var isCitrusFree = true
@@ -281,12 +278,9 @@ Plate.prototype.isCitrusFree = function() {
 	return isCitrusFree;
 }
 
-var testGuac = guacamolePlate.isCitrusFree();
-console.log(testGuac);
 
 
-
-//TEST Restaurant thru instatiating plates, drink, menu
+//TEST Restaurant thru instatiating plates, drink, menu and testing frees
 
 var burritoPlate = new Plate(
     'Burrito Plate', 
@@ -294,11 +288,21 @@ var burritoPlate = new Plate(
     15.00, 
     [burrito, beansAndRice, guacamole, salsa, sourCream]);
 
+var testPlate = burritoPlate.isVegan();
+console.log(testPlate);
+
+var testBurrito = burritoPlate.isGlutenFree();
+console.log(testBurrito);
+
 var guacamolePlate = new Plate(
     'Guacamole Plate', 
     'holy guac and chips', 
     6.00, 
     [guacamole, tortillaChips, salsa]);
+
+var testGuac = guacamolePlate.isCitrusFree();
+console.log(testGuac);
+
 
 var margarita = new Drink(
     'margarita', 
