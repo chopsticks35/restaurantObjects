@@ -137,7 +137,7 @@ Drink.prototype.stringify = function(){
     return ('Name: ' + this.name + 
             '. \nDecription: ' + this.description + 
             '. \nPrice: ' + this.price +
-            '. \nIngredients: ' + returnIngredients.push(FoodItem));
+            '. \nIngredients: ' + returnIngredients.push(FoodItem) + ',');
 //            '. \nIngredients: ' + this.FoodItem.join(', ') + '.')
            
 };
@@ -169,7 +169,8 @@ Plate.prototype.stringify = function(){
 	return ('Name: ' + this.name +
             '. \nDescription: ' + this.description + 
             '. \nPrice: ' + this.price + 
-            '. \nIngredients: ' + returnIngredients)
+            '. \nIngredients: ' + returnIngredients + ',')
+//          '. \nIngredients: ' + this.FoodItem.join(', ') + '.')
 };
 
 var burritoPlate = new Plate(
@@ -219,7 +220,9 @@ var Restaurant = function(name, description, menu) {
 }
 
 Restaurant.prototype.stringify = function() {
-	return 'Name: ' + this.name + '\nDescription: ' + this.description + '\nMenu: ' + this.menu.stringify()
+	return 'Name: ' + this.name +
+            '. \nDescription: ' + this.description +
+            '. \nMenu: ' + this.menu.stringify()
 };
 
 var myRestaurant = new Restaurant(
@@ -272,13 +275,13 @@ Plate.prototype.isCitrusFree = function() {
 }
 
 
-//INSTANTIATION TEST
+//TEST Restaurant thru instatiating plates, drink, menu
 
 var burritoPlate = new Plate('Burrito Plate', 'burrito', 15.00, [burrito, beansAndRice, guacamole])
 var guacamolePlate = new Plate('Guacamole Plate', 'holy guac and chips', 6.00, [guacamole, tortillaChips])
 var margarita = new Drink('margarita', 'top shelf margarita', 8.00, [tequilla, lime])
 
-var myMenu = new Menu([burritoPlate, guacPlate, margarita]);
+var myMenu = new Menu([burritoPlate, guacamolePlate, margarita, icedTea]);
 
 var myRestaurant = new Restaurant('Ti\'s Mexican Fiesta', 'fresh and festive', myMenu);
 
