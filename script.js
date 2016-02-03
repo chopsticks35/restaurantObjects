@@ -249,41 +249,69 @@ console.log(newCustomer);
 //functions for vegan gluten free and citrus free
 Plate.prototype.isVegan = function() {
 	var isVegan = true
-	this.ingredients.forEach(function(ingredient) {
-		if (!ingredient.isVegan)
+	this.FoodItem.forEach(function(FoodItem) {
+		if (!FoodItem.isVegan)
 			isVegan = false
 	})
-	return isVegan
+	return isVegan;
 }
+
+ var testPlate = burritoPlate.isVegan();
+console.log(testPlate);
 
 Plate.prototype.isGlutenFree = function() {
 	var isGlutenFree = true
-	this.ingredients.forEach(function(ingredient) {
-		if (!ingredient.isGlutenFree)
+	this.FoodItem.forEach(function(FoodItem) {
+		if (!FoodItem.isGlutenFree)
 			isGlutenFree = false
 	})
-	return isGlutenFree
+	return isGlutenFree;
 }
+
+var testBread = bread.isGlutenFree();
+console.log();
 
 Plate.prototype.isCitrusFree = function() {
 	var isCitrusFree = true
-	this.ingredients.forEach(function(ingredient) {
-		if (!ingredient.isCitrusFree)
+	this.FoodItem.forEach(function(FoodItem) {
+		if (!FoodItem.isCitrusFree)
 			isCitrusFree = false
 	})
-	return isCitrusFree
+	return isCitrusFree;
 }
+
+var marg = margarita.isCitrusFree();
+console.log(marg);
+
 
 
 //TEST Restaurant thru instatiating plates, drink, menu
 
-var burritoPlate = new Plate('Burrito Plate', 'burrito', 15.00, [burrito, beansAndRice, guacamole])
-var guacamolePlate = new Plate('Guacamole Plate', 'holy guac and chips', 6.00, [guacamole, tortillaChips])
-var margarita = new Drink('margarita', 'top shelf margarita', 8.00, [tequilla, lime])
+var burritoPlate = new Plate(
+    'Burrito Plate', 
+    'Big burrito', 
+    15.00, 
+    [burrito, beansAndRice, guacamole]);
 
-var myMenu = new Menu([burritoPlate, guacamolePlate, margarita, icedTea]);
+var guacamolePlate = new Plate(
+    'Guacamole Plate', 
+    'holy guac and chips', 
+    6.00, 
+    [guacamole, tortillaChips]);
 
-var myRestaurant = new Restaurant('Ti\'s Mexican Fiesta', 'fresh and festive', myMenu);
+var margarita = new Drink(
+    'margarita', 
+    'top shelf margarita', 
+    8.00, 
+    [tequilla, lime]);
+
+var myMenu = new Menu(
+    [burritoPlate, guacamolePlate, margarita, icedTea]);
+
+var myRestaurant = new Restaurant(
+    'Ti\'s Mexican Fiesta', 
+    'fresh and festive', 
+    myMenu);
 
 console.log(myRestaurant.stringify());
 
