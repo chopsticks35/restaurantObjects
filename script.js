@@ -69,9 +69,9 @@ var guacamole = new FoodItem(
     false
 );
 
-var tortilla = new FoodItem(
-    'flour tortilla', 
-    300, 
+var tortillaChips = new FoodItem(
+    'fried corn tortilla chips', 
+    200, 
     true, 
     true, 
     true
@@ -84,11 +84,6 @@ var beansAndRice = new FoodItem(
     true, 
     false
 );
-
-//stringify with no side effects - or could use toString method
-FoodItem.prototype.stringify = function() {
-	return ("Name: " + this.name + ". Calories: " + this.calories + ". Vegan: " + this.vegan + ". Gluten Free: " + this.glutenFree + ". Citrus Free: " + this.citrusFree + ".")
-}
 
 var tea = new FoodItem(
     'tea',
@@ -114,15 +109,37 @@ var water = new FoodItem(
     true
 );
 
-
-
+//stringify with no side effects - could use toString method???
+FoodItem.prototype.stringify = function() {
+	return ("Name: " + this.name + 
+            ". \nCalories: " + this.calories + 
+            ". \nVegan: " + this.vegan + 
+            ". \nGluten Free: " + this.glutenFree + 
+            ". \nCitrus Free: " + this.citrusFree + ".");
+}
 
 //drink constructor
 var Drink = function(name, description, price, FoodItem){
-    this.name = name;
-    this.description = description;
-    this.price = price;
-    this.FoodItem = FoodItem;
+    this.name = name || 'unnamed';
+    this.description = description || 'none';
+    this.price = price || 0;
+    this.FoodItem = FoodItem || [];
+};
+
+
+Drink.prototype.stringify = function(){
+    
+//unsure if needed to push food item into new array???
+    var returnIngredients = [];
+    this.FoodItem.forEach(function(FoodItem){
+        returnIngredients.push(FoodItem)
+    })
+    return ('Name: ' + this.name + 
+            '. \nDecription: ' + this.description + 
+            '. \nPrice: ' + this.price +
+            '. \nIngredients: ' + returnIngredients.push(FoodItem));
+//            '. \nIngredients: ' + this.FoodItem.join(', ') + '.')
+           
 };
 
 var icedTea = new Drink(
@@ -132,81 +149,140 @@ var icedTea = new Drink(
     [tea, sugar, water]
 );
 
-Drink.prototype.stringify = function(){
-};
-
-console.log(tea);
+console.log(icedTea);
 
 //plate constructor
 var Plate = function(name, description, price, FoodItem){
-    this.name = name;
-    this.description = description;
-    this.price = price;
-    this.FoodItem = FoodItem;
+    this.name = name || 'no name';
+    this.description = description || 'none';
+    this.price = price || 0;
+    this.FoodItem = FoodItem || [];
 }
+
+Plate.prototype.stringify = function(){
+
+//unsure if needed to push food item into new array???
+   var returnIngredients = [];
+    this.FoodItem.forEach(function(FoodItem){
+        returnIngredients.push(FoodItem)
+    })
+	return ('Name: ' + this.name +
+            '. \nDescription: ' + this.description + 
+            '. \nPrice: ' + this.price + 
+            '. \nIngredients: ' + returnIngredients)
+};
 
 var burritoPlate = new Plate(
     'humongous burrito plate',
-    'big ass loaded burrito',
     15.00,
-    [burrito, apple]
+    [burrito, beansAndRice, guacamole]
 );
-
-Plate.prototype.stringify = function(){
-};
 
 console.log(burritoPlate);
 
 //order constructor - array of plate
-var Order = function(Plate){
-    this.Plate = Plate;
-};
+var Order = function(Plate) {
+	this.Plates = Plate || []
+}
 
+Order.prototype.stringify = function() {
+	for(Plate in Plates) {
+		return Plate.prototype.stingify()
+	}
+}
 var newOrder = new Order([burritoPlate]);
 console.log(newOrder);
 
-Order.prototype.stringify = function(){
-};
 
 //menu constructor
 var Menu = function(Plate){
-    this.Plate = Plate;
+    this.Plate = Plate || [];
 };
+
+
+Menu.prototype.stringify = function() {
+	var returnPlates = []
+	this.Plate.forEach(function(Plate) {
+		returnPlates.push(Plate.stringify())
+	})
+	return returnPlates
+}
 
 var myMenu = new Menu([burritoPlate]);
     console.log(myMenu);
 
-Menu.prototype.stringify = function(){
-};
-
 //restaurant constructor
-var Restaurant = function(name, description, Menu){
-    this.name=name;
-    this.description=description;
-    this.Menu=Menu;
+var Restaurant = function(name, description, menu) {
+	this.name = name || 'generic restaurant'
+	this.description = description || 'none'
+	this.menu = menu || []
+}
+
+Restaurant.prototype.stringify = function() {
+	return 'Name: ' + this.name + '\nDescription: ' + this.description + '\nMenu: ' + this.menu.stringify()
 };
 
 var myRestaurant = new Restaurant(
     'Ti\'s Restaurant',
-    'food that is simple and delicious',
-    myMenu
+    'food',
+    Plate
 );
 
 console.log(myRestaurant);
 
-Restaurant.prototype.stringify = function(){
-};
-
 //customer constructor
-var Customer = function(dietaryPreference){
-    this.dietaryPreference=dietaryPreference;
+var Customer = function(dietaryPreference) {
+	this.dietaryPreference = dietaryPreference
+}
+
+Customer.prototype.stringify = function() {
+	return 'Dietary preference: ' + this.dietaryPreference + '.'
 };
 
 var newCustomer = new Customer('vegan');
 console.log(newCustomer);
 
-//stringify method - return string JSON formatted as ???
 
+//functions for vegan gluten free and citrus free
+Plate.prototype.isVegan = function() {
+	var isVegan = true
+	this.ingredients.forEach(function(ingredient) {
+		if (!ingredient.isVegan)
+			isVegan = false
+	})
+	return isVegan
+}
+
+Plate.prototype.isGlutenFree = function() {
+	var isGlutenFree = true
+	this.ingredients.forEach(function(ingredient) {
+		if (!ingredient.isGlutenFree)
+			isGlutenFree = false
+	})
+	return isGlutenFree
+}
+
+Plate.prototype.isCitrusFree = function() {
+	var isCitrusFree = true
+	this.ingredients.forEach(function(ingredient) {
+		if (!ingredient.isCitrusFree)
+			isCitrusFree = false
+	})
+	return isCitrusFree
+}
+
+
+//INSTANTIATION TEST
+
+var burritoPlate = new Plate('Burrito Plate', 'burrito', 15.00, [burrito, beansAndRice, guacamole])
+var guacamolePlate = new Plate('Guacamole Plate', 'holy guac and chips', 6.00, [guacamole, tortillaChips])
+var margarita = new Drink('margarita', 'top shelf margarita', 8.00, [tequilla, lime])
+
+var myMenu = new Menu([burritoPlate, guacPlate, margarita]);
+
+var myRestaurant = new Restaurant('Ti\'s Mexican Fiesta', 'fresh and festive', myMenu);
+
+console.log(myRestaurant.stringify());
 
 
 
