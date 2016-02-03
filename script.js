@@ -1,10 +1,10 @@
 //Food Item constructor
 var FoodItem = function(name, calories, vegan, glutenFree, citrusFree){
-    this.name = name;
-    this.calories = calories;
-    this.vegan = vegan;
-    this.glutenFree = glutenFree;
-    this.citrusFree = citrusFree;
+    this.name = name || 'unnamed';
+    this.calories = calories || 0;
+    this.vegan = vegan || false;
+    this.glutenFree = glutenFree || false;
+    this.citrusFree = citrusFree || false;
 }
 
 var apple = new FoodItem(
@@ -45,29 +45,77 @@ var burrito = new FoodItem(
     true
 );
 
-//stringify with no side effects
-FoodItem.prototype.stringify = function(){
-};
+var lime = new FoodItem(
+    'fresh lime',
+    5,
+    true,
+    true,
+    false
+);
 
-var greenTea = new FoodItem(
-    'green tea',
+var tequilla = new FoodItem(
+    'anjeo tequilla',
+    100,
+    true,
+    true,
+    true
+);
+
+var guacamole = new FoodItem(
+    'holy guacamole', 
+    50, 
+    false, 
+    false, 
+    false
+);
+
+var tortilla = new FoodItem(
+    'flour tortilla', 
+    300, 
+    true, 
+    true, 
+    true
+);
+
+var beansAndRice = new FoodItem(
+    'black beans and rice', 
+    300, 
+    false, 
+    true, 
+    false
+);
+
+//stringify with no side effects - or could use toString method
+FoodItem.prototype.stringify = function() {
+	return ("Name: " + this.name + ". Calories: " + this.calories + ". Vegan: " + this.vegan + ". Gluten Free: " + this.glutenFree + ". Citrus Free: " + this.citrusFree + ".")
+}
+
+var tea = new FoodItem(
+    'tea',
     5,
     true,
     true,
     true
 );
 
-var lime = new FoodItem(
-    'fresh lime',
-    5,
-    true;
-    true;
-    false
+var sugar = new FoodItem(
+    'sugar',
+    20,
+    true,
+    true,
+    true
 );
 
-var tequilla = new FoodITem(
-    '
+var water = new FoodItem(
+    'water',
+    0,
+    true,
+    true,
+    true
 );
+
+
+
 
 //drink constructor
 var Drink = function(name, description, price, FoodItem){
@@ -77,11 +125,11 @@ var Drink = function(name, description, price, FoodItem){
     this.FoodItem = FoodItem;
 };
 
-var tea = new Drink(
-    'green tea',
-    'lightly caffinated hot green tea',
+var icedTea = new Drink(
+    'sweet iced tea',
+    'brewed sweet tea',
     2.00,
-    [greenTea, 'water']
+    [tea, sugar, water]
 );
 
 Drink.prototype.stringify = function(){
