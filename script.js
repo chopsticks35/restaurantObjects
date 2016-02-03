@@ -130,16 +130,15 @@ var Drink = function(name, description, price, FoodItem){
 
 Drink.prototype.stringify = function(){
     
-//unsure if needed to push food item into new array???
+//push ingredients.stringfy
     var returnIngredients = [];
     this.FoodItem.forEach(function(FoodItem){
-        returnIngredients.push(FoodItem)
+        returnIngredients.push(FoodItem.stringify())
     })
     return ('Name: ' + this.name + 
             '. \nDecription: ' + this.description + 
             '. \nPrice: ' + this.price +
-            '. \nIngredients: ' + returnIngredients.push(FoodItem) + ',');
-//            '. \nIngredients: ' + this.FoodItem.join(', ') + '.')
+            '. \nIngredients: ' + returnIngredients.join(', ') + '.');
            
 };
 
@@ -162,16 +161,16 @@ var Plate = function(name, description, price, FoodItem){
 
 Plate.prototype.stringify = function(){
 
-//unsure if needed to push food item into new array???
+//push stringified ingredients
    var returnIngredients = [];
     this.FoodItem.forEach(function(FoodItem){
-        returnIngredients.push(FoodItem)
+        returnIngredients.push(FoodItem.stringify())
     })
 	return ('Name: ' + this.name +
             '. \nDescription: ' + this.description + 
             '. \nPrice: ' + this.price + 
-            '. \nIngredients: ' + returnIngredients + ',')
-//          '. \nIngredients: ' + this.FoodItem.join(', ') + '.')
+            '. \nIngredients: ' + returnIngredients.join(', ') + '.')
+
 };
 
 var burritoPlate = new Plate(
@@ -188,8 +187,8 @@ var Order = function(Plate) {
 }
 
 Order.prototype.stringify = function() {
-	for(Plate in Plates) {
-		return Plate.prototype.stingify()
+	for(Plate in this.Plates) {
+		return Plate.stingify()
 	}
 }
 var newOrder = new Order([burritoPlate]);
