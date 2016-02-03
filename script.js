@@ -116,7 +116,7 @@ FoodItem.prototype.stringify = function() {
             ". \nCalories: " + this.calories + 
             ". \nVegan: " + this.vegan + 
             ". \nGluten Free: " + this.glutenFree + 
-            ". \nCitrus Free: " + this.citrusFree + ".");
+            ". \nCitrus Free: " + this.citrusFree + ".\n");
 }
 
 //drink constructor
@@ -138,7 +138,7 @@ Drink.prototype.stringify = function(){
     return ('Name: ' + this.name + 
             '. \nDecription: ' + this.description + 
             '. \nPrice: ' + this.price +
-            '. \nIngredients: ' + returnIngredients.join(', ') + '.');
+            '. \nIngredients: ' + returnIngredients.join(', ') + '.\n');
            
 };
 
@@ -169,7 +169,7 @@ Plate.prototype.stringify = function(){
 	return ('Name: ' + this.name +
             '. \nDescription: ' + this.description + 
             '. \nPrice: ' + this.price + 
-            '. \nIngredients: ' + returnIngredients.join(', ') + '.')
+            '. \nIngredients: ' + returnIngredients.join(', ') + '.\n')
 
 };
 
@@ -222,7 +222,7 @@ var Restaurant = function(name, description, menu) {
 Restaurant.prototype.stringify = function() {
 	return 'Name: ' + this.name +
             '. \nDescription: ' + this.description +
-            '. \nMenu: ' + this.menu.stringify()
+            '. \nMenu: ' + this.menu.stringify() +'.\n'
 };
 
 var myRestaurant = new Restaurant(
