@@ -7,35 +7,36 @@ var FoodItem = function(name, calories, vegan, glutenFree, citrusFree){
     this.citrusFree = citrusFree || false;
 }
 
-var apple = new FoodItem(
-    'fuji',
-    25,
-    true,
-    true,
-    true
-);
-console.log(apple);
-
-
-var bread = new FoodItem(
-    'wholeWheat',
-    100,
-    false,
-    false,
-    true
-);
-
-console.log(bread);
-
-var orange = new FoodItem(
-    'navel',
-    80,
+//instantiate some items
+var mixer = new FoodItem(
+    'margarita mix',
+    30,
     true,
     true,
     false
 );
+console.log(mixer);
 
-console.log(orange);
+
+var salsa = new FoodItem(
+    'mexicali salsa',
+    15,
+    true,
+    true,
+    true
+);
+
+console.log(salsa);
+
+var sourCream = new FoodItem(
+    'crema',
+    25,
+    false,
+    true,
+    true
+);
+
+console.log(sourCream);
 
 var burrito = new FoodItem(
     'big burrito',
@@ -268,8 +269,8 @@ Plate.prototype.isGlutenFree = function() {
 	return isGlutenFree;
 }
 
-var testBread = bread.isGlutenFree();
-console.log();
+var testBurrito = burritoPlate.isGlutenFree();
+console.log(testBurrito);
 
 Plate.prototype.isCitrusFree = function() {
 	var isCitrusFree = true
@@ -280,8 +281,8 @@ Plate.prototype.isCitrusFree = function() {
 	return isCitrusFree;
 }
 
-var marg = margarita.isCitrusFree();
-console.log(marg);
+var testGuac = guacamolePlate.isCitrusFree();
+console.log(testGuac);
 
 
 
@@ -291,19 +292,19 @@ var burritoPlate = new Plate(
     'Burrito Plate', 
     'Big burrito', 
     15.00, 
-    [burrito, beansAndRice, guacamole]);
+    [burrito, beansAndRice, guacamole, salsa, sourCream]);
 
 var guacamolePlate = new Plate(
     'Guacamole Plate', 
     'holy guac and chips', 
     6.00, 
-    [guacamole, tortillaChips]);
+    [guacamole, tortillaChips, salsa]);
 
 var margarita = new Drink(
     'margarita', 
     'top shelf margarita', 
     8.00, 
-    [tequilla, lime]);
+    [tequilla, lime, mixer]);
 
 var myMenu = new Menu(
     [burritoPlate, guacamolePlate, margarita, icedTea]);
